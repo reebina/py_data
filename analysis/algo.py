@@ -20,7 +20,7 @@ from sklearn.ensemble import RandomForestClassifier
 
 #read data set
 
-data_set = pd.read_csv("/Users/iamsan/Downloads/heart2.csv")
+data_set = pd.read_csv("data_sets/heart2.csv")
 
 def visualization_correlation_matrix():
     rcParams['figure.figsize'] = 20, 14
