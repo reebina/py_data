@@ -16,7 +16,7 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.svm import SVC
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier
-
+from sklearn.naive_bayes import GaussianNB
 
 #read data set
 
@@ -60,6 +60,17 @@ data = {
         
   } 
 
+X = data_set.iloc[:, :-1].values
+y = data_set.iloc[:, -1].values
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
+
+model = GaussianNB()
+model.fit(X_train, y_train)
+predict = model.predict(X_test)
+plt.scatter(y_test, predict)
+
+output = classification_report(y_test, prediction)
 
 
         

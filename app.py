@@ -1,7 +1,11 @@
 import streamlit as st
 import matplotlib.pyplot as plt 
+import streamlit.components.v1 as components
+
 
 from analysis.algo import data
+
+
 
 # Sidebar
 st.sidebar.header("Menu")
