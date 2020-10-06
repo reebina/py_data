@@ -60,17 +60,17 @@ data = {
         
   } 
 
-X = data_set.iloc[:, :-1].values
-y = data_set.iloc[:, -1].values
+# X = data_set.iloc[:, :-1].values
+# y = data_set.iloc[:, -1].values
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
+# X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
 
-model = GaussianNB()
-model.fit(X_train, y_train)
-predict = model.predict(X_test)
-plt.scatter(y_test, predict)
+# model = GaussianNB()
+# model.fit(X_train, y_train)
+# predict = model.predict(X_test)
+# plt.scatter(y_test, predict)
 
-output = classification_report(y_test, prediction)
+# output = classification_report(y_test, prediction)
 
 
         
