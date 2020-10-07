@@ -56,14 +56,6 @@ def nb_implementation():
     accuracy_score(yTest, yPredict)
     report = classification_report(yTest, yPredict)
     return report
-
-def user_implementation(user_data):
-    nb = GaussianNB()
-    nb.predict(user_data)
-    # Accuracy Score 
-    accuracy_score(yTest, uPredict)
-    return classification_report(yTest, uPredict)
-    
         
 
 data = {
