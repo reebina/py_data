@@ -6,9 +6,7 @@ import streamlit as st
 import pandas as pd
 
 from streamlit.components.v1 import html 
-from analysis.algo import data, user_implementation
-from ui.login import login
-from ui.model_ui import model_ui
+from analysis.algo import data
 
 
 
@@ -20,7 +18,6 @@ st.beta_set_page_config(
     layout = "centered"
     
 )
-
 
 user_details = [
             {
@@ -122,8 +119,8 @@ if sidebar_selection == "Login":
                         if st.button("Submit"):
                             user_data_df = pd.DataFrame([age, sex, cp, trestbps, chol, fbs, restecg, thalach, exang, oldpeak, slope, ca, thal, target])
                             st.header("User Data Results")
-                            user_report = user_implementation(user_data_df)
-                            st.code(user_report)
+                            # user_report = user_implementation(user_data_df)
+                            # st.code(user_report)
                         
                             
                         
