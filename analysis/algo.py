@@ -6,71 +6,72 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib import rcParams
 from matplotlib.cm import rainbow
+import seaborn as sb
 
 # For data split 
 from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler
+from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
 
-#Algorithims
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.svm import SVC
-from sklearn.tree import DecisionTreeClassifier
-from sklearn.ensemble import RandomForestClassifier
+#Algorithim
 from sklearn.naive_bayes import GaussianNB
 
-#read data set
+data_set = pd.read_csv("/Users/iamsan/Desktop/py_data/data_sets/heart2.csv")
 
-data_set = pd.read_csv("data_sets/heart2.csv")
-
-def visualization_correlation_matrix():
-    rcParams['figure.figsize'] = 20, 14
-    plt.matshow(data_set.corr())
-    plt.yticks(np.arange(data_set.shape[1]), data_set.columns)
-    plt.xticks(np.arange(data_set.shape[1]), data_set.columns)
-    plt.colorbar()
-
-def visualization_histogram():
-    data_set.hist()
+def target_age():
+    '''
     
-def target_clases():
-    rcParams['figure.figsize'] = 8,6
-    plt.bar(dataset['target'].unique(), dataset['target'].value_counts(), color = ['red', 'green'])
-    plt.xticks([0, 1])
-    plt.xlabel('Target Classes')
-    plt.ylabel('Count')
-    plt.title('Count of each Target Class')
 
-def data_processing():
-    data_set = pd.get_dummies(data_set, 
-            columns = ['sex', 'cp', 'fbs', 'restecg', 'exang', 'slope', 'ca', 'thal'])
+    Returns
+    -------
+    seaborn object to demonstrate the distribution of target againts age.
+
+    '''
+    sb.set_context(font_scale=1.5, rc = {"font.size" : 6, "axes.titlesize":6, "axes.labelsize": 6})
+    return sb.catplot(kind = 'count', data = data_set, x = 'age', hue = 'target',
+               order = data_set['age'].sort_values().unique())
+
+def age_sex_target():
+    '''
     
-def scale_data():
-    standardScaler = StandardScaler()
-    columns_to_scale = ['age', 'trestbps', 'chol', 'thalach', 'oldpeak']
-    dataset[columns_to_scale] = standardScaler.fit_transform(dataset[columns_to_scale])
+
+    Returns
+    -------
+    seaborn object to demonstrate barplot of age agains sex with hue as target
+
+    '''
+    return  sb.catplot(kind = "bar", data = data_set, y = "age", x = "sex", hue = "target")
 
 
 
+def nb_implementation():
+    X = data_set.iloc[:, :-1].values
+    y = data_set.iloc[:, -1].values
+    xTrain, xTest, yTrain, yTest = train_test_split(X, y, test_size = 0.2, random_state = 0)
+    nb = GaussianNB()
+    nb.fit(xTrain, yTrain)
+    yPredict = nb.predict(xTest)
+    
+    # Accuracy Score 
+    cm = confusion_matrix(yTest, yPredict)
+    accuracy_score(yTest, yPredict)
+    report = classification_report(yTest, yPredict)
+    return report
+
+def user_implementation(user_data):
+    nb = GaussianNB()
+    nb.predict(user_data)
+    # Accuracy Score 
+    accuracy_score(yTest, uPredict)
+    return classification_report(yTest, uPredict)
+    
+        
 
 data = {
-      "data_set" : data_set ,
-      "data_info" : data_set.info(),
-      "data_describe" : data_set.describe(),
-      "data_histo" : visualization_correlation_matrix()
+      "data_set" : data_set,
+      "data_describe" : data_set.describe,
+      "target_age" : target_age,
+      "age_sex_target" : age_sex_target,
+      "report" : nb_implementation
         
-  } 
+}
 
-# X = data_set.iloc[:, :-1].values
-# y = data_set.iloc[:, -1].values
-
-# X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
-
-# model = GaussianNB()
-# model.fit(X_train, y_train)
-# predict = model.predict(X_test)
-# plt.scatter(y_test, predict)
-
-# output = classification_report(y_test, prediction)
-
-
-        
