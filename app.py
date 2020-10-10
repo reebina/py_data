@@ -5,6 +5,7 @@ import csv
 import streamlit as st
 import pandas as pd
 
+# streamlit for ui
 from streamlit.components.v1 import html 
 from analysis.algo import data
 
