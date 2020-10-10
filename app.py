@@ -45,6 +45,28 @@ columns = """
 
 
 st.title("MITS 6500 Heart Disease Prediction Web Application")
+
+
+##################################################################
+#                   ADD Text Here if you want
+##################################################################
+
+st.header("A Brief Introduction about the Project")
+st.text("Packages used in this project ")
+st.text("For UI - StreamLit")
+st.text("""
+        # Libs
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib import rcParams
+from matplotlib.cm import rainbow
+import seaborn as sb
+
+        
+        """)
+
+
 isLoggedIn = False
 sidebar_selection = st.sidebar.selectbox("Choose Your Operation", ["About WebApp", "Login", "Sign Up"])
 
@@ -121,7 +143,37 @@ if sidebar_selection == "Login":
                             st.header("User Data Results")
                             # user_report = user_implementation(user_data_df)
                             # st.code(user_report)
+
+                if item['user_type'] == "Client":
+                    st.header("Please enter your data below")
+                    age = st.text_input("Enter Age")
+                    sex = st.text_input("Enter Gender")
+                    html("<small>Enter 1 for Male and 0 for Female</small>")
+                    cp = st.text_input("Enter Chest Pain type")
+                    html("<small>Enter 1 - typical angina, 2 - atypical angina, 3 - non-anginal, 4 - asymptotic pain</small>")
+                    trestbps = st.text_input("Resting Blood Pressure")
+                    chol = st.text_input("Serum Cholestrol")
+                    fbs = st.text_input("Fasting Blood Sugar")
+                    html("<small>Enter 1 if fasting blood sugar is greater than 120 mg. Enter 0 otherwise")
+                    restecg = st.text_input("Resting ECG")
+                    html("<small>Enter 0 for normal, 1 having ST-T wave abnormality and 3 for left ventricular hyperthrophy</samll>")
+                    thalach = st.text_input("Maximum Heart Rate")
+                    exang = st.text_input("Exercise Induced Angina")
+                    html("<small>Enter 1 if yes , 0 otherwise</small>")
+                    oldpeak = st.text_input("ST induced by exercise")
+                    slope = st.text_input("Peak Exercise ST Segment")
+                    ca = st.text_input("Number of major vessels")
+                    html("<small>Enter major vessels 0-3")
+                    thal = st.text_input("Thalassemia Scan Results")
+                    html("<small>Enter 3 for normal, 6 for fixed defect and 7 for reversible defect")
+                    target = st.text_input("Enter if already suffering from  heart realted  issues")
+                    html("<small>Enter 0 for no heart related issues, 1 for if any issues exists")
                         
+                    if st.button("Submit"):
+                        user_data_df = pd.DataFrame([age, sex, cp, trestbps, chol, fbs, restecg, thalach, exang, oldpeak, slope, ca, thal, target])
+                        st.header("User Data Results")
+                        # user_report = user_implementation(user_data_df)
+                        # st.code(user_report)
                             
                         
                         
